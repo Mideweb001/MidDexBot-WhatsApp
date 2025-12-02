@@ -1,44 +1,15 @@
 [phases.setup]
-nixPkgs = [
-  "nodejs_22",
-  "npm-9_x",
+aptPkgs = [
   "chromium",
-  "nss",
-  "freetype",
-  "harfbuzz",
-  "cacert",
-  "fontconfig",
-  "xorg.libX11",
-  "xorg.libXcomposite",
-  "xorg.libXdamage",
-  "xorg.libXext",
-  "xorg.libXfixes",
-  "xorg.libXrandr",
-  "xorg.libxcb",
-  "libxkbcommon",
-  "mesa",
-  "expat",
-  "alsa-lib",
-  "atk",
-  "cups",
-  "dbus",
-  "gdk-pixbuf",
-  "glib",
-  "gtk3",
-  "nspr",
-  "pango",
-  "libdrm"
+  "chromium-sandbox"
 ]
 
 [phases.install]
-cmds = ["npm i"]
-
-[phases.build]
-cmds = ["npm install"]
+cmds = ["npm install --omit=dev"]
 
 [start]
 cmd = "node src/bot.js"
 
 [variables]
 PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "true"
-PUPPETEER_EXECUTABLE_PATH = "/nix/store/$(ls /nix/store | grep chromium | head -n1)/bin/chromium"
+PUPPETEER_EXECUTABLE_PATH = "/usr/bin/chromium"
