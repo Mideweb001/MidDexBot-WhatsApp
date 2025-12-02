@@ -19,7 +19,7 @@ nixPkgs = [
   "libxshmfence",
   "mesa",
   "expat",
-  "alsaLib",
+  "alsa-lib",
   "atk",
   "cups",
   "dbus",
