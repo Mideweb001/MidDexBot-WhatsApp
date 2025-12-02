@@ -15,8 +15,7 @@ nixPkgs = [
   "xorg.libXfixes",
   "xorg.libXrandr",
   "xorg.libxcb",
-  "xorg.libxkbcommon",
-  "xorg.libxshmfence",
+  "libxkbcommon",
   "mesa",
   "expat",
   "alsa-lib",
@@ -28,8 +27,7 @@ nixPkgs = [
   "gtk3",
   "nspr",
   "pango",
-  "libdrm",
-  "libgbm"
+  "libdrm"
 ]
 
 [phases.install]
