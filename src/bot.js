@@ -17,22 +17,29 @@ class WhatsAppBot {
     this.isProduction = process.env.NODE_ENV === 'production';
     
     // Initialize WhatsApp client
+    const puppeteerOptions = {
+      headless: true,
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-accelerated-2d-canvas',
+        '--no-first-run',
+        '--no-zygote',
+        '--disable-gpu'
+      ]
+    };
+
+    // Use system Chromium in production (Railway)
+    if (this.isProduction && process.env.PUPPETEER_EXECUTABLE_PATH) {
+      puppeteerOptions.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
+    }
+
     this.client = new Client({
       authStrategy: new LocalAuth({
         dataPath: './whatsapp-sessions'
       }),
-      puppeteer: {
-        headless: true,
-        args: [
-          '--no-sandbox',
-          '--disable-setuid-sandbox',
-          '--disable-dev-shm-usage',
-          '--disable-accelerated-2d-canvas',
-          '--no-first-run',
-          '--no-zygote',
-          '--disable-gpu'
-        ]
-      }
+      puppeteer: puppeteerOptions
     });
 
     // Initialize services
