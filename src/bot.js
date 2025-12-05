@@ -175,6 +175,7 @@ class WhatsAppBot {
     }
   }
 
+
   async handleMessage(message) {
     try {
       // Ignore group messages and status updates
@@ -182,11 +183,24 @@ class WhatsAppBot {
         return;
       }
 
-      const contact = await message.getContact();
+      // Get contact info safely
+      let contact;
+      try {
+        contact = await message.getContact();
+      } catch (err) {
+        // Fallback if getContact fails
+        contact = {
+          id: { user: message.from.split('@')[0] },
+          pushname: 'User',
+          number: message.from.split('@')[0],
+          name: 'User'
+        };
+      }
+      
       const chatId = message.from;
       const text = message.body.trim();
       
-      console.log(`📨 Message from ${contact.pushname}: ${text}`);
+      console.log(`📨 Message from ${contact.pushname || 'User'}: ${text}`);
 
       // Find or create user
       const user = await this.findOrCreateUser(contact);
@@ -204,6 +218,34 @@ class WhatsAppBot {
       await message.reply('❌ Sorry, an error occurred. Please try again.');
     }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   async findOrCreateUser(contact) {
     try {
