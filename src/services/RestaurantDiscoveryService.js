@@ -708,4 +708,4 @@ class RestaurantDiscoveryService {
   }
 }
 
-module.exports = new RestaurantDiscoveryService();
+module.exports = RestaurantDiscoveryService;

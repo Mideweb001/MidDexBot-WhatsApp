@@ -568,4 +568,4 @@ class DeliveryTrackingService {
   }
 }
 
-module.exports = new DeliveryTrackingService();
+module.exports = DeliveryTrackingService;

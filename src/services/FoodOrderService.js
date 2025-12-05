@@ -528,4 +528,4 @@ class FoodOrderService {
   }
 }
 
-module.exports = new FoodOrderService();
+module.exports = FoodOrderService;

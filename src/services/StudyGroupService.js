@@ -481,4 +481,4 @@ class StudyGroupService {
   }
 }
 
-module.exports = new StudyGroupService();
+module.exports = StudyGroupService;

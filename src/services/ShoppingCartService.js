@@ -331,4 +331,4 @@ class ShoppingCartService {
   }
 }
 
-module.exports = new ShoppingCartService();
+module.exports = ShoppingCartService;

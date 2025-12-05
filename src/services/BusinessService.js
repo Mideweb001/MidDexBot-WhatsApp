@@ -360,4 +360,4 @@ class BusinessService {
   }
 }
 
-module.exports = new BusinessService();
+module.exports = BusinessService;

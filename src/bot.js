@@ -146,8 +146,14 @@ class WhatsAppBot {
     try {
       console.log('🔄 Initializing database...');
       
-      // Sync database
-      await db.sequelize.sync({ alter: !this.isProduction });
+      // Sync database - use safe mode to avoid schema conflicts
+      if (this.isProduction) {
+        await db.sequelize.sync({ alter: false });
+      } else {
+        // In development, just authenticate without altering schema
+        await db.sequelize.authenticate();
+        console.log('✅ Database connection verified');
+      }
       
       // Initialize services
       this.databaseService = new DatabaseService(db);

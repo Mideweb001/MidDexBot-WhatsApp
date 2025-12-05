@@ -516,4 +516,4 @@ CONFIDENCE: [0.0-1.0]
   }
 }
 
-module.exports = new HomeworkAssistant();
+module.exports = HomeworkAssistant;
