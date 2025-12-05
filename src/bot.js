@@ -30,9 +30,16 @@ class WhatsAppBot {
       ]
     };
 
-    // Use system Chromium in production (Railway)
-    if (this.isProduction && process.env.PUPPETEER_EXECUTABLE_PATH) {
-      puppeteerOptions.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
+    // Let puppeteer/whatsapp-web.js find Chromium automatically
+    // Only set executablePath if explicitly provided and file exists
+    if (process.env.PUPPETEER_EXECUTABLE_PATH) {
+      const fs = require('fs');
+      if (fs.existsSync(process.env.PUPPETEER_EXECUTABLE_PATH)) {
+        puppeteerOptions.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
+        console.log(`🌐 Using Chromium at: ${process.env.PUPPETEER_EXECUTABLE_PATH}`);
+      } else {
+        console.log(`⚠️ PUPPETEER_EXECUTABLE_PATH set but not found, letting puppeteer auto-detect`);
+      }
     }
 
     this.client = new Client({

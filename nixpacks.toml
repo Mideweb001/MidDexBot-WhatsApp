@@ -1,15 +1,8 @@
 [phases.setup]
-aptPkgs = [
-  "chromium",
-  "chromium-driver"
-]
+aptPkgs = ["chromium"]
 
 [phases.install]
-cmds = ["npm install --omit=dev"]
+cmds = ["npm install"]
 
 [start]
 cmd = "node src/bot.js"
-
-[variables]
-PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "true"
-PUPPETEER_EXECUTABLE_PATH = "/usr/bin/chromium"
